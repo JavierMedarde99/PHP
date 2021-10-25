@@ -28,15 +28,25 @@ die("no se ha abierto");
 }
 
 echo "<h1>Resultado:</h1>";
-$primera_fila=fgets();
-$textoEntero= nl2br($texto);
-echo"<table border='1' solid>" ;
-echo "<tr>";
-for($i=0; $i<strlen($textoEntero);$i++){
-    echo "<td>".$textoEntero[$i]."</td>";
-    }
-    echo "</tr>";
+$primera_fila=fgets($fd);
+
+$columnas=explode("\t",$primera_fila);
+
+$numColumnas=count($columnas);
+echo "<table border='1'>";
+for($i=0;$i<$numColumnas;$i++)
+    echo "<th>".$columnas[$i]."</th>";
+
+while($primera_fila=fgets($fd))
+escribir_fila_tabla($primera_fila,$numColumnas);
 echo "</table>";
+
+
+fclose($fd);
+
+
+
+
 ?>
 </body>
 </html>
