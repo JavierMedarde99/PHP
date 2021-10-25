@@ -72,6 +72,7 @@ for($i=0;$i<$n_columnas;$i++){
                 }
             }
             echo "</table>";
+            
             fclose($fd);
         }
         ?>
