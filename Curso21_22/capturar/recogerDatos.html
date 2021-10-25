@@ -1,4 +1,22 @@
+<?php 
+ if(isset($_POST[/*"nombre"*/"btnEnviar"])){
 
+    $nombre=$_POST["nombre"];
+    $apellidos=$_POST["apellidos"];
+    $contraseña=$_POST["contraseña"];
+    $dni=$_POST["dni"];
+    if(isset($_POST["sexo"])){
+        $sexo=$_POST["sexo"];
+    } 
+    if(isset($_POST["subs"])){
+        $subs=$_POST["subs"];
+    } 
+} else{
+    header("Location:index.php");
+    exit;
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="es" id="recepcion">
