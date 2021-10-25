@@ -2,13 +2,16 @@
 function escribir_fila_tabla($linea,$n_columnas){
     $fila=explode("\t",$linea);
     echo "<tr aling='center'>";
-    for($i;$i<$n_columnas;$i++){
-if(isset()){
-    
-}
+    for($i=0;$i<$n_columnas;$i++){
+if(isset($fila[$i])){
+echo "<td>".$fila[$i]."</td>";
+
+    }else{
+echo "<td>--</td>";
     }
 }
-
+echo "</tr>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +27,8 @@ if(!$fd){
 die("no se ha abierto");
 }
 
-$primera_fila=fgets()
+echo "<h1>Resultado:</h1>";
+$primera_fila=fgets();
 $textoEntero= nl2br($texto);
 echo"<table border='1' solid>" ;
 echo "<tr>";
