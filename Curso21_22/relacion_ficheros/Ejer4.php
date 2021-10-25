@@ -1,6 +1,8 @@
 <?php
-if($_POST["btnEnviar"])
-$error_fichero=$_FILES["fichero"]["name"]!="" && ($_FILES["fichero"]["error"] || !gettext($_FILES["fichero"]["tmp_name"]) || $_FILES["fichero"]["size"]>2500000);
+if(isset($_POST["btnEnviar"])){
+$errorFichero = $_FILES["fichero"]["name"]!="" && ($_FILES["fichero"]["error"] || !gettext($_FILES["fichero"]["tmp_name"]) || $_FILES["fichero"]["size"]>2500000);
+
+}  
 
 ?>
 
@@ -32,26 +34,25 @@ $error_fichero=$_FILES["fichero"]["name"]!="" && ($_FILES["fichero"]["error"] ||
         </form>
 
         <?php
-        if(isset($_POST["btnEnviar"]) && !$error_fichero){
-            $array_nombre=explode(".",$_FILES["foto"]["name"]);
-        $exten=end($array_nombre);
-        
-        
-        if(count($array_nombre)==1){
-              $exten="";
-        }else{
-            $exten=".".end($array_nombre);  
-        }
-        $nombre_unico=md5(uniqid(uniqid(),true)); 
-            @$var =move_uploaded_file($_FILES["foto"]["tmp_name"],"Tablas/".$nombre_unico.$exten);
- 
-        if($var){
-            echo "<h3>La imagen ha sido subida con exito</h3>";
-            echo"<p><img src='imagenes/".$nombre_unico."'/></p>";
-        }else{
-            echo"<p>Error no tiene permiso para moverse en la carpeta destino </p>";
-        }
-        }
+        if(isset($_POST["btnEnviar"]) && !$errorFichero){
+            @$fd=fopen("Tablas/".$_FILES["fichero"]["name"],"r");
+        if(!$fd)
+        die("<p>NO se ha podido leer el fichero <em>'Tablas/".$_FILES["fichero"]["name"].".txt'</em> </p>");
+
+        $cont=0;
+        while($line=fgets($fd)){
+            for($i=0; $i<strlen($line);$i++){
+                if($line[$i]==" ")
+                $cont++;
+            } 
+        } 
+
+        fseek($fd,0);
+
+            fclose($fd);
+            echo "el numero de palabras son :".$cont;
+    }
         ?>
+        
     </body>
 </html>
