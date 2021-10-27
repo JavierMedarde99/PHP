@@ -41,7 +41,7 @@ if(isset($_POST["btnSubir"]) && $error_archivo){
 </form>
 <?php
 if(isset($_POST["btnSubir"]) && !$error_archivo){
- @$var = move_uploaded_file( $_FILES["archivo"]["rmp_name"],"Ficheros/archivo.txt");
+ @$var = move_uploaded_file( $_FILES["archivo"]["tmp_name"],"Ficheros/archivo.txt");
  if(!$var)
  echo "<p>no se ha podido mover el fichero subido a la carpeta destino</p>";
  else

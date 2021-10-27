@@ -54,7 +54,7 @@ if(isset($_POST["btnSubir"]))
      @$file=fopen("Horarios/horarios.txt","r");
      if(!$file){
 ?>
-<form action="ejercicio2.php" method="post" enctype="multipart/form-data">
+<form action="ejercicio4.php" method="post" enctype="multipart/form-data">
 <p><label for="archivo">Seleccione un archivo de texto no superior a 1MB</label></p>
 <input type="file" name="archivo" id="archivo" accept=".txt">
 <?php
@@ -75,7 +75,7 @@ if(isset($_POST["btnSubir"]) && $error_archivo){
 </form>
 <?php
 if(isset($_POST["btnSubir"]) && !$error_archivo){
- @$var = move_uploaded_file( $_FILES["archivo"]["rmp_name"],"Ficheros/archivo.txt");
+ @$var = move_uploaded_file( $_FILES["archivo"]["tmp_name"],"Horario/horarios.txt");
  if(!$var)
  echo "<p>no se ha podido mover el fichero subido a la carpeta destino</p>";
  else
