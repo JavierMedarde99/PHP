@@ -112,9 +112,9 @@ if(isset($_POST["btnSubir"]) && $error_archivo){
 ?>
     <h1>Ejercicio4</h1>
     <h2>Horario de los Profesores</h2>
-    <form action="ejercicio4.php" method="post">
+    <form action="ejercicio4.php" method="post" name="form_profesor">
         <p><label for="profesor">Horario del profesor:</label></p>
-        <select name="profesor" id="profesor">
+        <select onchange ="document.form_profesor-submit();" name="profesor" id="profesor">
             <?php
 while($fila=fgets($file)){
 $valores=mi_explode("\t",$fila);
