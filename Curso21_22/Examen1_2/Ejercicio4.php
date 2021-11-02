@@ -50,14 +50,17 @@ fclose($file);
 echo "<tr>";
 echo "<th></th><th>Lunes</th><th>martes</th><th>Miercoles</th><th>Jueves</th><th>Viernes</th>";
 echo "</tr>";
+
 for($i=1;$i<=7;$i++){
-    echo "<tr><td>".$hora[$i]."</td>";
+    echo "<tr>";
+    echo "<td>".$hora[$i]."</td>";
     if($i==4){
 echo "<td colspan='5'>Recreo</td>";
     }
-
-    }
+ echo "</tr>";
 }
+    }
+   
     
     ?>
 </body>
