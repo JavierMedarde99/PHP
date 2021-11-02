@@ -5,19 +5,35 @@ function mirar_grupos($file,$profesor,$dia,$hora){
 $resp="";
 
       while($fila=fgets($file)){
+
           $valores=explode("\t",$fila);
+
 if($valores[0]==$profesor){
+
 for($i=0;$i<count($valores);$i+=3){
+
     if($valores[$i]==$dia && $valores[$i+1]==$hora){
+
+if($resp=="")
     $resp=$valores[$i+2];
-    break;
+else
+    $resp.="/".$valores[$i+2];
+
+    
+    
+
 }
+
 }
+break;
 }
+
       }
 
 
 fclose($file);
+
+
 return $resp;
 }
 
@@ -32,7 +48,7 @@ return $resp;
     <title>Ejercicio4 version 2</title>
 </head>
 <body>
-    <h1>Ejercicio4</h1>
+    <h1>Ejercicio4_2</h1>
     <form action="Ejercicio4.php" method="post">
     <p><label for="">Seleccione un profesor</label>
     <?php
@@ -72,7 +88,7 @@ fclose($file);
         $hora[6]= "12:45-13:45";
         $hora[7]= "13:45-14:45";
 
-fseek($file,0);
+        @$file=fopen("horarios.txt","r");
 
         echo "<table border='black'>";
 echo "<tr>";
