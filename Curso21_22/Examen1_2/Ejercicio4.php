@@ -56,8 +56,14 @@ for($i=1;$i<=7;$i++){
     echo "<td>".$hora[$i]."</td>";
     if($i==4){
 echo "<td colspan='5'>Recreo</td>";
+    }else{
+    for($j=1;$j<=5;$j++){
+echo"<td>--</td>";
+
     }
+    
  echo "</tr>";
+}
 }
     }
    
