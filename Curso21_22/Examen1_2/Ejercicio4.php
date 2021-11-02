@@ -36,8 +36,28 @@ fclose($file);
 </p>
 </form>
 <?php
-    if(isset($_POST["btnVer"]))
-    echo "<h3>horario del profesor ".$_POST["profesor"]."</h3>"
+    if(isset($_POST["btnVer"])){
+        echo "<h3>horario del profesor ".$_POST["profesor"]."</h3>";
+
+        $hora[1]="8:15-9:15";
+        $hora[2]="9:15-10:15";
+        $hora[3]= "10:15-11:15";
+        $hora[4]="11:15-11:45";
+        $hora[5]= "11:45-12:45";
+        $hora[6]= "12:45-13:45";
+        $hora[7]= "13:45-14:45";
+        echo "<table border='black'>";
+echo "<tr>";
+echo "<th></th><th>Lunes</th><th>martes</th><th>Miercoles</th><th>Jueves</th><th>Viernes</th>";
+echo "</tr>";
+for($i=1;$i<=7;$i++){
+    echo "<tr><td>".$hora[$i]."</td>";
+    if($i==4){
+echo "<td colspan='5'>Recreo</td>";
+    }
+
+    }
+}
     
     ?>
 </body>
