@@ -1,3 +1,28 @@
+<?php
+
+function mirar_grupos($file,$profesor,$dia,$hora){
+    fseek($file,0);
+$resp="";
+
+      while($fila=fgets($file)){
+          $valores=explode("\t",$fila);
+if($valores[0]==$profesor){
+for($i=0;$i<count($valores);$i+=3){
+    if($valores[$i]==$dia && $valores[$i+1]==$hora){
+    $resp=$valores[$i+2];
+    break;
+}
+}
+}
+      }
+
+
+fclose($file);
+return $resp;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,6 +71,9 @@ fclose($file);
         $hora[5]= "11:45-12:45";
         $hora[6]= "12:45-13:45";
         $hora[7]= "13:45-14:45";
+
+fseek($file,0);
+
         echo "<table border='black'>";
 echo "<tr>";
 echo "<th></th><th>Lunes</th><th>martes</th><th>Miercoles</th><th>Jueves</th><th>Viernes</th>";
@@ -58,13 +86,16 @@ for($i=1;$i<=7;$i++){
 echo "<td colspan='5'>Recreo</td>";
     }else{
     for($j=1;$j<=5;$j++){
-echo"<td>--</td>";
+echo"<td>".mirar_grupos($file,$_POST["profesor"],$j,$i)."</td>";
 
     }
     
  echo "</tr>";
 }
 }
+
+echo "</table>";
+fclose($file);
     }
    
     
