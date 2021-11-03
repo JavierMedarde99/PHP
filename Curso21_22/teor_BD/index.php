@@ -36,21 +36,20 @@
 
         //Proximamente: $datos=mysqli_fetch_object($resultado);
         // echo "<p>".$datos->telefono."</p>";
+
+        mysqli_free_result($resultado); 
+        mysqli_close($conexion);
     }else{
 
-        die("Imposible realizar la consulta. Error Numero: ".mysqli_errno($conexion)." : ".mysqli_error($conexion));
+        $error ="<p>Imposible realizar la consulta. Error Numero: ".mysqli_errno($conexion)." : ".mysqli_error($conexion)."</p>";
+        mysqli_close($conexion);
+        die($error);
 
     }
 
 
 
-
-
-
-
-
-
-    mysqli_close($conexion);
+  
     ?>
 </body>
 </html>
