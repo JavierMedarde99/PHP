@@ -59,6 +59,7 @@ echo "<li>".$poblaciones. ": " .$habitantes. "habitantes </li>";
 
 
    ?>
+  
 </body>
 
 </html>
