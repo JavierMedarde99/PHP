@@ -7,6 +7,10 @@
     <title>Teoria BD PHP</title>
 </head>
 <body>
+    <?php
     
+    @$conexion=mysqli_connect("localhost","jose","josefa","bd_teoria");
+
+    ?>
 </body>
 </html>
