@@ -11,7 +11,21 @@
     
     @$conexion=mysqli_connect("localhost","jose","josefa","bd_teoria");
     if(!$conexion)
-    die("Imposible conectar. Error Numero: ".mysqli_connect_errno()." : ".mysqli_connect_error());
+        die("Imposible conectar. Error Numero: ".mysqli_connect_errno()." : ".mysqli_connect_error());
+
+    mysqli_set_charset($conexion,"utf8");
+
+
+
+
+
+
+
+
+
+
+
+    mysqli_close($conexion);
     ?>
 </body>
 </html>
