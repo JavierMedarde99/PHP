@@ -37,6 +37,12 @@
         //Proximamente: $datos=mysqli_fetch_object($resultado);
         // echo "<p>".$datos->telefono."</p>";
 
+        echo "<p>Recorro todo los resultados</p>";
+        while($datos=mysqli_fetch_assoc($resultado)){
+            var_dump($datos);
+            echo "<br/>";
+        }
+
         mysqli_free_result($resultado); 
         mysqli_close($conexion);
     }else{
