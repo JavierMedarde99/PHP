@@ -22,7 +22,20 @@
         $n_tuplas=mysqli_num_rows($resultado);
 
         echo "<p>El numero de alumnos en la BD es: ".$n_tuplas." </p>";
+        
+        $datos=mysqli_fetch_row($resultado);
+        echo "<p>".$datos[2]."</p>";
+       
+        $datos=mysqli_fetch_assoc($resultado);
+        echo "<p>".$datos["telefono"]."</p>";
 
+        $datos=mysqli_fetch_array($resultado);
+        var_dump($datos);
+
+        mysqli_data_seek($resultado,0);
+
+        //Proximamente: $datos=mysqli_fetch_object($resultado);
+        // echo "<p>".$datos->telefono."</p>";
     }else{
 
         die("Imposible realizar la consulta. Error Numero: ".mysqli_errno($conexion)." : ".mysqli_error($conexion));
