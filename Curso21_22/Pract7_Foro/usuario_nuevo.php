@@ -29,8 +29,12 @@
     <br/>
     <br/>
     <label for="email">Email</label>
-    <input type="text" name="email" id="email">
+    <input type="email" name="email" id="email">
 
+    <br/>
+    <br/>
+    <input type="submit" value="Continuar" name="btnContinuar">
+    <input type="submit" value="Volver" namr="btnVolver">
     </form>
 </body>
 </html>
