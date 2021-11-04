@@ -12,6 +12,15 @@
 </head>
 <body>
     <h1>Listado de usuarios </h1>
+    <table>
+        <tr>
+            <th>Nombre de Usuario</th>
+            <th>borar</th>
+            <th>editar</th>
+        </tr>
+<?php
 
+?>
+</table>
 </body>
 </html>
