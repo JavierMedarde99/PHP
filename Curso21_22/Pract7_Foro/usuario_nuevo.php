@@ -1,3 +1,12 @@
+<?php
+if(isset($_POST["btnVolver"]))
+header('Location: index.php');
+
+if(isset($_POST["btnContinuar"])){
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +18,7 @@
 <body>
     <h1>Nuevo Usuario</h1>
 
-    <form action="index.php" method="post">
+    <form action="usuario_nuevo.php" method="post">
 
     <br/>
     <br/>
@@ -34,7 +43,7 @@
     <br/>
     <br/>
     <input type="submit" value="Continuar" name="btnContinuar">
-    <input type="submit" value="Volver" namr="btnVolver">
+    <input type="submit" value="Volver" name="btnVolver">
     </form>
 </body>
 </html>
