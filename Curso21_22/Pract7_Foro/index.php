@@ -13,7 +13,8 @@
         .centrar{text-align: center;}
         table,th,td{border:1px solid black}
         table{border-collapse: collapse;width: 60%;margin: 0 auto;}
-    </style>
+        .form_nuevo{width: 60%; margin: 1.5px auto; }
+   </style>
 </head>
 <body>
     <h1 class="centrar">Listado de usuarios </h1>
@@ -43,8 +44,8 @@ echo "</tr>";
         while($datos=mysqli_fetch_assoc($resultado)){
              echo "<tr>";
         echo "<td>".$datos["nombre"]."</td>";
-        echo "<td><img src='imagenes/borrar.png'></td>";
-        echo "<td><img src='imagenes/editar.png'></td>";
+        echo "<td><img src='imagenes/borrar.png' title='Borrar usuario' alt='Borrar'></td>";
+        echo "<td><img src='imagenes/editar.png' title='Editar usuario' alt='Borrar'></td>";
         echo "</tr>";
         }
         echo "</table>";
@@ -60,6 +61,11 @@ echo "</tr>";
 
     }   
 ?>
+
+<form clas="form_nuevo" action="usuario_nuevo.php" method="post">
+<input type="submit" value="Insertar nuevo Usuario" name="btnNuevo">
+
+</form>
 </table>
 </body>
 </html>
