@@ -3,7 +3,11 @@ if(isset($_POST["btnVolver"]))
 header('Location: index.php');
 
 if(isset($_POST["btnContinuar"])){
-
+    $error_Nombre= $_POST["nombre"]=="";
+    $error_Usuario=$_POST["usuario"]=="" || repetido($_POST["usuario"]);
+    $error_Contraseña= $_POST["contraseña"]=="";
+    $error_Email=$_POST["email"]=="";
+    $errores=$error_Nombre|| $error_Usuario || $error_Contraseña || $error_Email;
 }
 ?>
 
