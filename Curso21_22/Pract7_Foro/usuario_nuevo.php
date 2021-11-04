@@ -2,6 +2,17 @@
 if(isset($_POST["btnVolver"]))
 header('Location: index.php');
 
+function repetido($repetirdo){
+    @$conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NAME_BD);
+    if(!$conexion)
+        die("Imposible conectar. Error Numero: ".mysqli_connect_errno()." : ".mysqli_connect_error());
+   
+        mysqli_set_charset($conexion,"utf8");
+   
+        $consulta="SELECT * FROM usuarios";
+        $resultado=mysqli_query($conexion,$consulta);
+}
+
 if(isset($_POST["btnContinuar"])){
     $error_Nombre= $_POST["nombre"]=="";
     $error_Usuario=$_POST["usuario"]=="" || repetido($_POST["usuario"]);
