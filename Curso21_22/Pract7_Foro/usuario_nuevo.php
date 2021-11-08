@@ -52,7 +52,7 @@ if(isset($_POST["btnContinuar"]) && $error_Nombre){
         <input type="text" name="usuario" id="usuario"
             value="<?php if(isset($_POST["usuario"])) echo $_POST["usuario"];?>">
         <?php
-if(isset($_POST["btnContinuar"])){
+if(isset($_POST["btnContinuar"])&& $error_Usuario){
     if($_POST["usuario"]=="")
     echo "<p>*Campo vacio*</p>";
     else
@@ -75,7 +75,7 @@ if(isset($_POST["btnContinuar"]) && $error_Contraseña){
         <label for="email">Email</label>
         <input type="email" name="email" id="email" value="<?php if(isset($_POST["email"])) echo $_POST["email"];?>">
         <?php
-if(isset($_POST["btnContinuar"])){
+if(isset($_POST["btnContinuar"])&& $error_Email){
     if($_POST["email"]=="")
     echo "<p>*Campo vacio*</p>";
     else
