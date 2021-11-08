@@ -10,8 +10,9 @@ function repetido($usuario,$conexion){
             mysqli_free_result($resultado);
 
         }else{
-            $respuesta[1]="Imposible conectar consulta. Numero".mysqli_errno($conexion)." : ".mysqli_error($conexion);
+            $respuesta["error"]="Imposible conectar consulta. Numero".mysqli_errno($conexion)." : ".mysqli_error($conexion);
         }
+        return $respuesta;
     }
        
        
@@ -26,7 +27,7 @@ if(isset($_POST["btnContinuar"])){
       if($conexion){
            mysqli_set_charset($conexion,"utf8");
          $error_Usuario_Repetido= repetido($_POST["usuario"],$conexion);
-        if(!is_array($error_Usuario_Repetido)) echo "no error";
+        if(! is_array($error_Usuario_Repetido)) echo "hola";
         };
 
     $error_Contraseña= $_POST["contraseña"]=="" ;
