@@ -8,7 +8,7 @@ function repetido($repetirdo){
    
         mysqli_set_charset($conexion,"utf8");
    
-        $consulta="SELECT * FROM usuarios";
+        $consulta="SELECT usuario FROM usuarios";
         $resultado=mysqli_query($conexion,$consulta);
 }
 
@@ -37,7 +37,7 @@ if(isset($_POST["btnContinuar"])){
     <br/>
     <br/>
     <label for="nombre">Nombre</label>
-    <input type="text" name="nombre" id="nombre">
+    <input type="text" name="nombre" id="nombre" value="<?php if(isset($_POST["nombre"])) echo $_POST["nombre"];?>">
 <?php
 if(isset($_POST["btnContinuar"]) && $error_Nombre){
     echo "<p>*Campo vacio*</p>";
@@ -47,7 +47,7 @@ if(isset($_POST["btnContinuar"]) && $error_Nombre){
     <br/>
     <br/>
     <label for="usuario">Usuario</label>
-    <input type="text" name="usuario" id="usuario">
+    <input type="text" name="usuario" id="usuario" value="<?php if(isset($_POST["usuario"])) echo $_POST["usuario"];?>">
     <?php
 if(isset($_POST["btnContinuar"])){
     if($_POST["usuario"]=="")
@@ -59,7 +59,7 @@ if(isset($_POST["btnContinuar"])){
     <br/>
     <br/>
     <label for="contraseña">Contraseña</label>
-    <input type="password" name="contraseña" id="contraseña">
+    <input type="password" name="contraseña" id="contraseña" value="<?php if(isset($_POST["contraseña"])) echo $_POST["contraseña"];?>">
     <?php
 if(isset($_POST["btnContinuar"]) && $error_Contraseña){
     echo "<p>*Campo vacio*</p>";
@@ -69,7 +69,7 @@ if(isset($_POST["btnContinuar"]) && $error_Contraseña){
     <br/>
     <br/>
     <label for="email">Email</label>
-    <input type="email" name="email" id="email">
+    <input type="email" name="email" id="email" value="<?php if(isset($_POST["email"])) echo $_POST["email"];?>">
     <?php
 if(isset($_POST["btnContinuar"])){
     if($_POST["email"]=="")
