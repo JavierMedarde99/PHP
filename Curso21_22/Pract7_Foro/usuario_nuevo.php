@@ -1,29 +1,47 @@
 <?php
 
 
-function repetido($repetirdo){
-    require "src/config.php";
-    @$conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NAME_BD);
-    if(!$conexion)
-        die("Imposible conectar. Error Numero: ".mysqli_connect_errno()." : ".mysqli_connect_error());
-   
-        mysqli_set_charset($conexion,"utf8");
-   
-        $consulta="SELECT usuario FROM usuarios";
+function repetido($usuario,$conexion){
+        $consulta="SELECT usuario FROM usuarios WHERE usuario='".$usuario."'";
         $resultado=mysqli_query($conexion,$consulta);
-}
+        if($resultado)
+        {
+            $respuesta=mysqli_num_rows($resultado)>0;
+            mysqli_free_result($resultado);
+
+        }else{
+            $respuesta[1]="Imposible conectar consulta. Numero".mysqli_errno($conexion)." : ".mysqli_error($conexion);
+        }
+    }
+       
+       
 
 if(isset($_POST["btnContinuar"])){
     $error_Nombre= $_POST["nombre"]=="";
-    $error_Usuario=$_POST["usuario"]=="" || repetido($_POST["usuario"]);
+ $error_Usuario_Vacio=$_POST["usuario"]=="";
+
+    require "src/config.php";
+    @$conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NAME_BD);
+   
+      if($conexion){
+           mysqli_set_charset($conexion,"utf8");
+         $error_Usuario_Repetido= repetido($_POST["usuario"],$conexion);
+        if(!is_array($error_Usuario_Repetido)) echo "no error";
+        };
+
     $error_Contraseña= $_POST["contraseña"]=="" ;
-    $error_Email=$_POST["email"]==""|| !filter_var($email,FILTER_VALIDATE_EMAIL);
+    $error_Email=$_POST["email"]==""|| filter_var($email,FILTER_VALIDATE_EMAIL);
     $errores=$error_Nombre|| $error_Usuario || $error_Contraseña || $error_Email;
+
+        if(!$errores){
+            mysqli_close($conexion);
+        }
+
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -33,6 +51,14 @@ if(isset($_POST["btnContinuar"])){
 </head>
 
 <body>
+    <?php 
+    if(isset($_POST["btnContinuar"]) && !$conexion)
+    die("Imposible conectar. Error Numero: ".mysqli_connect_errno()." : ".mysqli_connect_error());
+    ?>
+
+    <?php
+   echo "<p>".$respuesta."</p>";
+    ?>
     <h1>Nuevo Usuario</h1>
 
     <form action="usuario_nuevo.php" method="post">
@@ -50,11 +76,10 @@ if(isset($_POST["btnContinuar"]) && $error_Nombre){
         <br />
         <br />
         <label for="usuario">Usuario</label>
-        <input type="text" name="usuario" id="usuario"
-            value="<?php if(isset($_POST["usuario"])) echo $_POST["usuario"];?>">
+        <input type="text" name="usuario" id="usuario" value="<?php if(isset($_POST["usuario"])) echo $_POST["usuario"];?>">
         <?php
-if(isset($_POST["btnContinuar"])&& $error_Usuario){
-    if($_POST["usuario"]=="")
+if(isset($_POST["btnContinuar"])&& $error_Usuario_Vacio){
+    if($error_Usuario_Vacio)
     echo "<p>*Campo vacio*</p>";
     else
     echo "usuario repetido";
