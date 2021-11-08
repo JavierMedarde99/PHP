@@ -2,6 +2,7 @@
 
 
 function repetido($repetirdo){
+    require "src/config.php";
     @$conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NAME_BD);
     if(!$conexion)
         die("Imposible conectar. Error Numero: ".mysqli_connect_errno()." : ".mysqli_connect_error());
