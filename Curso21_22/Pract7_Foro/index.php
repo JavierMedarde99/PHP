@@ -1,90 +1,77 @@
 <?php
     require "src/config.php";
+    if(isset($_POST["insertado"]))
+        $accion="Usuario insertado con éxito";
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primer CRUD</title>
+    <title>Primer CRUD - Index</title>
     <style>
-    .centrar {
-        text-align: center;
-    }
-
-    table,
-    th,
-    td {
-        border: 1px solid black
-    }
-
-    table {
-        border-collapse: collapse;
-        width: 60%;
-        margin: 0 auto;
-    }
-
-    .form_nuevo {
-        width: 60%;
-        margin: 1.5px auto;
-    }
+        .centrar{text-align:center}
+        .form_nuevo, .mensaje{width:60%;margin:1.5em auto;}
+        table,th,td{border:1px solid black}
+        table{border-collapse:collapse; width:60%;margin:0 auto}
+        .sin_boton{background:transparent;border:none;color:blue;text-decoration:underline;cursor:pointer}
     </style>
 </head>
-
 <body>
-    <h1 class="centrar">Listado de usuarios </h1>
-
-
-
-
-
-
+    <h1 class="centrar">Listado de los Usuarios</h1>
+    
     <?php
- @$conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NAME_BD);
- if(!$conexion)
-     die("<p>Imposible conectar. Error Numero: ".mysqli_connect_errno()." : ".mysqli_connect_error()."</p></body></html>");
+    @$conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NOMBRE_BD);
+    if(!$conexion)
+        die("<p>Error en la conexión Nº: ".mysqli_connect_errno(). " : ".mysqli_connect_error()."</p></body></html>");
+    mysqli_set_charset($conexion,"utf8");
 
-     mysqli_set_charset($conexion,"utf8");
+    $consulta="select * from usuarios";
 
-     $consulta="SELECT * FROM usuarios";
-     $resultado=mysqli_query($conexion,$consulta);
+    $resultado=mysqli_query($conexion,$consulta);
+    if($resultado)
+    {
+        echo "<table class='centrar'><tr><th>Nombre de Usuario</th><th>Borrar</th><th>Editar</th></tr>";
 
-     if($resultado){
-echo "<table>";
-echo " <tr>";
-echo "<th>Nombre de Usuario</th>";
-echo " <th>borar</th>";
-echo "<th>editar</th>";
-echo "</tr>";
-        while($datos=mysqli_fetch_assoc($resultado)){
-             echo "<tr>";
-        echo "<td>".$datos["nombre"]."</td>";
-        echo "<td><img src='imagenes/borrar.png' title='Borrar usuario' alt='Borrar'></td>";
-        echo "<td><img src='imagenes/editar.png' title='Editar usuario' alt='Borrar'></td>";
-        echo "</tr>";
+        while($datos=mysqli_fetch_assoc($resultado))
+        {
+            echo "<tr>";
+            echo "<td><form action='index.php' method='post'><button class='sin_boton' name='btnListar' value='".$datos["id_usuario"]."'>".$datos["nombre"]."</button></form></td>";
+            echo "<td><img src='images/borrar.png' title='Borrar Usuario' alt='Borrar'/></td>";
+            echo "<td><img src='images/editar.png' title='Editar Usuario' alt='Editar'/></td>";
+            echo "</tr>";
         }
         echo "</table>";
-
-        mysqli_free_result($resultado); 
+        mysqli_free_result($resultado);
         mysqli_close($conexion);
 
-    }else{
+        if(isset($accion))
+            echo "<p class='mensaje'>".$accion."</p>";
 
-        $error ="<p>Imposible realizar la consulta. Error Numero: ".mysqli_errno($conexion)." : ".mysqli_error($conexion)."</p></body></html>";
+        if(isset($_POST["btnListar"]))
+        {
+            echo "Listaría";
+        }
+        else 
+        {    
+        
+        ?>
+        <form class="form_nuevo" action="usuario_nuevo.php" method="post">
+            <input type="submit" name="btnNuevo" value="Insertar nuevo Usuario"/>
+        </form>
+        <?php
+        }
+    }
+    else
+    {
+        $error="<p>Error en la consulta Nº: ".mysqli_errno($conexion). " : ".mysqli_error($conexion)."</p></body></html>";
         mysqli_close($conexion);
         die($error);
+    }
 
-    }   
-?>
-
-    <form clas="form_nuevo" action="usuario_nuevo.php" method="post">
-        <input type="submit" value="Insertar nuevo Usuario" name="btnNuevo">
-
-    </form>
-    </table>
+    ?>
+  
 </body>
-
 </html>
