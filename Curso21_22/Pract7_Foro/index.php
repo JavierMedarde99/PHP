@@ -45,7 +45,7 @@
     <?php
  @$conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NAME_BD);
  if(!$conexion)
-     die("Imposible conectar. Error Numero: ".mysqli_connect_errno()." : ".mysqli_connect_error());
+     die("<p>Imposible conectar. Error Numero: ".mysqli_connect_errno()." : ".mysqli_connect_error()."</p></body></html>");
 
      mysqli_set_charset($conexion,"utf8");
 
@@ -73,7 +73,7 @@ echo "</tr>";
 
     }else{
 
-        $error ="<p>Imposible realizar la consulta. Error Numero: ".mysqli_errno($conexion)." : ".mysqli_error($conexion)."</p>";
+        $error ="<p>Imposible realizar la consulta. Error Numero: ".mysqli_errno($conexion)." : ".mysqli_error($conexion)."</p></body></html>";
         mysqli_close($conexion);
         die($error);
 
