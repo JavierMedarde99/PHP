@@ -57,12 +57,18 @@
             $consulta = "SELECT * FROM usuarios WHERE id_usuario=".$_POST["btnListar"];
             $resultado=mysqli_query($conexion,$consulta);
             if($resultado){
-                $datos=mysqli_fetch_assoc($resultado);
-                mysqli_free_result($resultado);
+
+                if($datos=mysqli_fetch_assoc($resultado)){
+                     
                 echo "<p><strong>Nombre :</strong>".$datos["nombre"]."</p>";
                 echo "<p><strong>Nombre :</strong>".$datos["usuario"]."</p>";
                 echo "<p><strong>Nombre :</strong>".$datos["email"]."</p>";
-                echo "<form action='index.php' method='post'><input type='submit' values='volver' /></form>";
+                
+                }else{
+                    echo "<p>El usuario seleccionado ya no se encuentra en la base de daros</p>";
+                }
+                mysqli_free_result($resultado);
+               echo "<form action='index.php' method='post'><input type='submit' values='volver' /></form>";
                 echo "</div>";
             }else{
                 $error="<p>Error en la consulta Nº: ".mysqli_errno($conexion). " : ".mysqli_error($conexion)."</p></body></html>";
