@@ -67,7 +67,6 @@ function error_page($title,$body)
             echo "<td><form action='index.php' method='post'><input type='hidden' name='NombreBorrar' value='".$datos["nombre"]."'/><button class='sin_boton' name='btnBorrar' value='".$datos["id_usuario"]."'><img src='images/borrar.png' title='Borrar Usuario' alt='Borrar' /></button></form></td>";
             //boton para editar los usuarios
             echo "<td><form action='index.php' method='post'><input type='hidden' name='NombreEditar' value='".$datos["nombre"]."'/><button class='sin_boton' name='btnEditar' value='".$datos["id_usuario"]."'><img src='images/editar.png' title='Editar Usuario' alt='Editar'/></button></form></td>";
-           
             echo "</tr>";
         }
         echo "</table>";
@@ -80,7 +79,7 @@ function error_page($title,$body)
             if(isset($_POST["btnBorrar"])){
                 echo "<div class='resultado'";
                 echo "<h2>Borrado del usuario".$_POST["btnBorrar"]."</h2>";
-                echo "<form action=' method=''>"; 
+                echo "<form action='index.php' method='post'>"; 
                 echo "<p class='centrar'>Se dispone ha borrar al usuario con nombre: <strong>".$_POST["nombreBorrar"]."</strong></p>";
                 echo "<p class='centrar'><button type='submit' name='btnContBorrar' value='".$_POST["btnBorrar"]."'>Continuar</button> <input type='submit' value='Cancelar'/> </p>";
                 echo "</form>";
@@ -89,6 +88,7 @@ function error_page($title,$body)
             {
             echo "<div class='resultado'";
             echo "<h2>Detalles del usuario ".$_POST["btnListar"]."</h2>";
+            //BBDD
             $consulta = "SELECT * FROM usuarios WHERE id_usuario=".$_POST["btnListar"];
             $resultado=mysqli_query($conexion,$consulta);
             if($resultado){
