@@ -1,5 +1,30 @@
 <?php
+
+function error_page($title,$body)
+{
+    $html='<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0">';
+    $html.='<title>'.$title.'</title></head>';
+    $html.='<body>'.$body.'</body></html>';
+    return $html;
+}
+
     require "src/config.php";
+
+@$conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NOMBRE_BD);
+    if(!$conexion)
+        die(error_page("Primer CRUD Index","<h1>Listado de usuario</h1><p>Error en la conexión Nº: ".mysqli_connect_errno(). " : ".mysqli_connect_error()."</p>"));
+    mysqli_set_charset($conexion,"utf8");
+
+    if(isset($_POST["btnContBorrar"])){
+        $consulta="DELETE FROM usuarios WHERE id_usuario=".$_POST["btnContBorrar"];
+        $resultado=mysqli_query($conexion,$consulta);
+        if($resultado){
+
+        }else{
+            $body ="<h1>Listado de usuario</h1><p>Error en la conexión Nº: ".mysqli_connect_errno($conexion). " : ".mysqli_connect_error($conexion)."</p>";
+        }
+    }
+
     if(isset($_POST["insertado"]))
         $accion="Usuario insertado con éxito";
 ?>
@@ -23,11 +48,7 @@
     <h1 class="centrar">Listado de los Usuarios</h1>
     
     <?php
-    @$conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NOMBRE_BD);
-    if(!$conexion)
-        die("<p>Error en la conexión Nº: ".mysqli_connect_errno(). " : ".mysqli_connect_error()."</p></body></html>");
-    mysqli_set_charset($conexion,"utf8");
-
+    
     $consulta="select * from usuarios";
 
     $resultado=mysqli_query($conexion,$consulta);
@@ -55,12 +76,9 @@
                 echo "<h2>Borrado del usuario".$_POST["btnBorrar"]."</h2>";
                 echo "<form action=' method=''>"; 
                 echo "<p class='centrar'>Se dispone ha borrar al usuario con nombre: <strong>".$_POST["nombreBorrar"]."</strong></p>";
-                echo "<p class='centrar'><input type='submit' name='btnContBorrar' value='Continuar'> <input type='submit' value='Cancelar' </p>";
+                echo "<p class='centrar'><button type='submit' name='btnContBorrar' value='".$_POST["btnBorrar"]."'>Continuar</button <input type='submit' value='Cancelar' </p>";
                 echo "</form>";
-        }
-
-
-        if(isset($_POST["btnListar"]))
+        }elseif(isset($_POST["btnListar"]))
         {
             echo "<div class='resultado'";
             echo "<h2>Detalles del usuario".$_POST["btnListar"]."</h2>";
