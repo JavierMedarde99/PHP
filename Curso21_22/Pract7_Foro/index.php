@@ -39,7 +39,7 @@
         {
             echo "<tr>";
             echo "<td><form action='index.php' method='post'><button class='sin_boton' name='btnListar' value='".$datos["id_usuario"]."'>".$datos["nombre"]."</button></form></td>";
-            echo "<td><img src='images/borrar.png' title='Borrar Usuario' alt='Borrar'/></td>";
+            echo "<td><form action='index.php' method='post'><button class='sin_boton' name='btnBorrar' value='".$datos["id_usuario"]."'><img src='images/borrar.png' title='Borrar Usuario' alt='Borrar' /></button></form></td>";
             echo "<td><img src='images/editar.png' title='Editar Usuario' alt='Editar'/></td>";
             echo "</tr>";
         }
@@ -49,6 +49,11 @@
 
         if(isset($accion))
             echo "<p class='mensaje'>".$accion."</p>";
+        
+            if(isset($_POST["btnBorrar"])){
+
+        }
+
 
         if(isset($_POST["btnListar"]))
         {
