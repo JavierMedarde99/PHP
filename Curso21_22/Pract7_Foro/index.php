@@ -39,7 +39,7 @@
         {
             echo "<tr>";
             echo "<td><form action='index.php' method='post'><button class='sin_boton' name='btnListar' value='".$datos["id_usuario"]."'>".$datos["nombre"]."</button></form></td>";
-            echo "<td><form action='index.php' method='post'><button class='sin_boton' name='btnBorrar' value='".$datos["id_usuario"]."'><img src='images/borrar.png' title='Borrar Usuario' alt='Borrar' /></button></form></td>";
+            echo "<td><form action='index.php' method='post'><input type='hidden' name='bombreBorrar' value='".$datos["nombre"]."'/><button class='sin_boton' name='btnBorrar' value='".$datos["id_usuario"]."'><img src='images/borrar.png' title='Borrar Usuario' alt='Borrar' /></button></form></td>";
             echo "<td><img src='images/editar.png' title='Editar Usuario' alt='Editar'/></td>";
             echo "</tr>";
         }
@@ -51,7 +51,12 @@
             echo "<p class='mensaje'>".$accion."</p>";
         
             if(isset($_POST["btnBorrar"])){
-
+                echo "<div class='resultado'";
+                echo "<h2>Borrado del usuario".$_POST["btnBorrar"]."</h2>";
+                echo "<form action=' method=''>"; 
+                echo "<p class='centrar'>Se dispone ha borrar al usuario con nombre: <strong>".$_POST["nombreBorrar"]."</strong></p>";
+                echo "<p class='centrar'><input type='submit' name='btnContBorrar' value='Continuar'> <input type='submit' value='Cancelar' </p>";
+                echo "</form>";
         }
 
 
