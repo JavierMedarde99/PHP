@@ -13,7 +13,7 @@
     <title>Primer CRUD - Index</title>
     <style>
         .centrar{text-align:center}
-        .form_nuevo, .mensaje{width:60%;margin:1.5em auto;}
+        .form_nuevo, .mensaje,.resultado{width:60%;margin:1.5em auto;}
         table,th,td{border:1px solid black}
         table{border-collapse:collapse; width:60%;margin:0 auto}
         .sin_boton{background:transparent;border:none;color:blue;text-decoration:underline;cursor:pointer}
@@ -52,7 +52,9 @@
 
         if(isset($_POST["btnListar"]))
         {
-            echo "Listaría";
+            echo "<div class='resultado'";
+            echo "<h2>Detalles del usuario".$_POST["btnListar"]."</h2>";
+            echo "</div>";
         }
         else 
         {    
