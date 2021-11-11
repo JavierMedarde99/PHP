@@ -19,9 +19,11 @@ function error_page($title,$body)
         $consulta="DELETE FROM usuarios WHERE id_usuario=".$_POST["btnContBorrar"];
         $resultado=mysqli_query($conexion,$consulta);
         if($resultado){
-
+            $accion="El usuario seleccionado ha sido borrado con exito";
         }else{
             $body ="<h1>Listado de usuario</h1><p>Error en la conexión Nº: ".mysqli_connect_errno($conexion). " : ".mysqli_connect_error($conexion)."</p>";
+            mysqli_close($conexion);
+            die(error_page("Primer CRUD - Index",$body));
         }
     }
 
@@ -59,9 +61,13 @@ function error_page($title,$body)
         while($datos=mysqli_fetch_assoc($resultado))
         {
             echo "<tr>";
+            //nombre para activar el listar
             echo "<td><form action='index.php' method='post'><button class='sin_boton' name='btnListar' value='".$datos["id_usuario"]."'>".$datos["nombre"]."</button></form></td>";
-            echo "<td><form action='index.php' method='post'><input type='hidden' name='bombreBorrar' value='".$datos["nombre"]."'/><button class='sin_boton' name='btnBorrar' value='".$datos["id_usuario"]."'><img src='images/borrar.png' title='Borrar Usuario' alt='Borrar' /></button></form></td>";
-            echo "<td><img src='images/editar.png' title='Editar Usuario' alt='Editar'/></td>";
+            //boton para borrar los usuarios
+            echo "<td><form action='index.php' method='post'><input type='hidden' name='NombreBorrar' value='".$datos["nombre"]."'/><button class='sin_boton' name='btnBorrar' value='".$datos["id_usuario"]."'><img src='images/borrar.png' title='Borrar Usuario' alt='Borrar' /></button></form></td>";
+            //boton para editar los usuarios
+            echo "<td><form action='index.php' method='post'><input type='hidden' name='NombreEditar' value='".$datos["nombre"]."'/><button class='sin_boton' name='btnEditar' value='".$datos["id_usuario"]."'><img src='images/editar.png' title='Editar Usuario' alt='Editar'/></button></form></td>";
+           
             echo "</tr>";
         }
         echo "</table>";
@@ -70,18 +76,19 @@ function error_page($title,$body)
 
         if(isset($accion))
             echo "<p class='mensaje'>".$accion."</p>";
-        
+            //control del boton borrrar
             if(isset($_POST["btnBorrar"])){
                 echo "<div class='resultado'";
                 echo "<h2>Borrado del usuario".$_POST["btnBorrar"]."</h2>";
                 echo "<form action=' method=''>"; 
                 echo "<p class='centrar'>Se dispone ha borrar al usuario con nombre: <strong>".$_POST["nombreBorrar"]."</strong></p>";
-                echo "<p class='centrar'><button type='submit' name='btnContBorrar' value='".$_POST["btnBorrar"]."'>Continuar</button <input type='submit' value='Cancelar' </p>";
+                echo "<p class='centrar'><button type='submit' name='btnContBorrar' value='".$_POST["btnBorrar"]."'>Continuar</button> <input type='submit' value='Cancelar'/> </p>";
                 echo "</form>";
-        }elseif(isset($_POST["btnListar"]))
-        {
+                // control del boton listar
+             }elseif(isset($_POST["btnListar"]))
+            {
             echo "<div class='resultado'";
-            echo "<h2>Detalles del usuario".$_POST["btnListar"]."</h2>";
+            echo "<h2>Detalles del usuario ".$_POST["btnListar"]."</h2>";
             $consulta = "SELECT * FROM usuarios WHERE id_usuario=".$_POST["btnListar"];
             $resultado=mysqli_query($conexion,$consulta);
             if($resultado){
@@ -89,8 +96,8 @@ function error_page($title,$body)
                 if($datos=mysqli_fetch_assoc($resultado)){
                      
                 echo "<p><strong>Nombre :</strong>".$datos["nombre"]."</p>";
-                echo "<p><strong>Nombre :</strong>".$datos["usuario"]."</p>";
-                echo "<p><strong>Nombre :</strong>".$datos["email"]."</p>";
+                echo "<p><strong>Usuario :</strong>".$datos["usuario"]."</p>";
+                echo "<p><strong>Email :</strong>".$datos["email"]."</p>";
                 
                 }else{
                     echo "<p>El usuario seleccionado ya no se encuentra en la base de daros</p>";
