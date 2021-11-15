@@ -6,29 +6,6 @@ function salto_con_POST($ruta,$name)
     echo "</body></html>";
 }
 
-function error_page($title,$body)
-{
-    $html='<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0">';
-    $html.='<title>'.$title.'</title></head>';
-    $html.='<body>'.$body.'</body></html>';
-    return $html;
-}
-
-function repetido($conexion, $tabla, $columna, $valor)
-{
-    $consulta="select ".$columna." from ".$tabla." where ".$columna."='".$valor."'";
-    $resultado=mysqli_query($conexion, $consulta);
-    if($resultado)
-    {
-        $respuesta=mysqli_num_rows($resultado)>0;
-        mysqli_free_result($resultado);
-    }
-    else
-        $respuesta["error"]="Imposible realizar la consulta. Nº".mysqli_errno($conexion)." : ".mysqli_error($conexion);
-
-    return $respuesta;
-}
-
 
 if(isset($_POST["btnInsertar"]))
 {
@@ -39,7 +16,7 @@ if(isset($_POST["btnInsertar"]))
 
     if(!$error_usuario)
     {
-        require "src/config.php";
+        require "src/ctes_funciones.php";
         @$conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NOMBRE_BD);
         if(!$conexion)
             die(error_page("Primer CRUD - Nuevo Usuario","<h1>Nuevo Usuario</h1><p>Error en la conexión Nº: ".mysqli_connect_errno(). " : ".mysqli_connect_error()."</p>"));
@@ -63,7 +40,7 @@ if(isset($_POST["btnInsertar"]))
     {
         if(!isset($conexion))
         {
-            require "src/config.php";
+            require "src/ctes_funciones.php";
             @$conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NOMBRE_BD);
             if(!$conexion)
                 die(error_page("Primer CRUD - Nuevo Usuario","<h1>Nuevo Usuario</h1><p>Error en la conexión Nº: ".mysqli_connect_errno(). " : ".mysqli_connect_error()."</p>"));
