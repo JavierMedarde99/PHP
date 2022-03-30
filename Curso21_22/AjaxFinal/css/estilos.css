@@ -1,0 +1,149 @@
+.oculta{
+    display:none;
+}
+
+.visible{
+    display:block;
+}
+
+.enlace{
+    border:none;
+    background:none;
+    text-decoration:underline;
+    color:blue;
+    cursor: pointer;
+}
+
+h2{
+    text-align: center;
+}
+
+/*CONFIGURACIÓN DEL HTML*/
+*{
+
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    width: 100%;
+    height: 100%;
+}
+
+/*Cabecera*/
+header{
+    background-color: cyan;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: center;
+}
+
+header > h1{
+    text-align: center;
+    margin: 0 auto;
+}
+
+/*Main*/
+#formulario{
+    display: flex;
+    flex-flow: column nowrap;
+    
+    margin: 0 auto;
+}
+
+#formulario > img{
+    width: 15rem;
+    height: 15rem;
+}
+
+#vista_login{
+    width: 100%;
+}
+
+#formAdmin{
+    width: 100%;
+    text-align: center;
+    font-size: large;
+    font-weight: medium;
+}
+
+#vista_admin{
+    width: 100%;
+    text-align: center;
+    font-size: large;
+    font-weight: medium;
+}
+
+div#vista_oportuna{
+
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+table,td,th{
+
+    text-align: center;
+}
+
+div#vista_oportuna > div#tabla_horarios{
+
+    width: 100%;
+    font-size: large;
+    font-weight: medium;
+}
+
+div#vista_oportuna > div#editar_horario{
+
+    width: 100%;
+    text-align: center;
+    font-size: large;
+    font-weight: medium;
+}
+
+div#vista_oportuna > div#saludo{
+
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+    align-self: center;
+    margin: 1rem;
+    margin-top: 0;
+    font-size: large;
+}
+
+div#vista_oportuna > div#saludo > p{
+
+    width: 100%;
+    font-size: x-large;
+}
+
+div#vista_login{
+
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    align-self: center;
+    align-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+/*PIE*/
+footer{
+    width: 100%;
+    background: cyan;
+}
+
+footer > p{
+    font-size: large;
+    width: 100%;
+    text-align: center;
+    align-self: center;
+}
+

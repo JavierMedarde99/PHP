@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejer4</title>
+</head>
+<body>
+    <?php
+   class fruta{
+       private $color;
+       private $tamaño;
+       static private $n_frutas=0;
+
+       public function __construct($color,$tamaño){
+        $this->color=$color;
+        $this->tamaño=$tamaño;
+        $this->imprimir();
+        fruta::$n_frutas++;
+       }
+
+       public function __destruct() {
+        echo  $this->color, PHP_EOL;
+        echo  $this->tamaño, PHP_EOL;
+        fruta::$n_frutas--;
+    }
+
+       public function imprimir(){
+        echo "Esta es una fruta de color ".$this->color." de tamaño ".$this->tamaño;
+       }
+
+       public static function cuentaFruta(){
+           echo "hay ".fruta::$n_frutas." frutas";
+       }
+   } 
+
+   class uva extends fruta {
+    private int $tieneSemilla;
+
+       public function __construct($color,$tamaño,$tieneSemilla){
+           parent::__construct($color,$tamaño);
+           $this->tieneSemilla=$tieneSemilla;
+           $this->tieneSemillaF();
+           $this->semillas();
+       }
+
+       public function tieneSemillaF(){
+           return $this->tieneSemilla;
+       }
+
+       public function semillas(){
+        $semilla= $this->tieneSemillaF();
+        if($semilla==0){
+            echo " no tiene semillas";
+        }else{
+            echo " tiene semillas";
+        }
+       }
+   }
+   $pera = new fruta("verde","pequeña");
+   echo "</br>";
+   $manzana = new fruta("verde","grande");
+   echo "</br>";
+   echo fruta::cuentaFruta();
+   echo "</br>";
+  $uva = new uva("morada","pqueña",2);
+  echo "</br>";
+
+    ?>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+    <head>
+        <meta charset="UTF-8">
+        <title>Práctica 2 - Login y Vistas</title>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/login.js"></script>
+        <script src="js/productos.js"></script>
+        <script src="js/modal.js"></script>
+        <link rel="stylesheet" href="css/estilos.css"/>
+        <link rel="stylesheet" href="css/modal.css"/>
+      
+    </head>
+    <body>
+        <h1>Login y Vistas</h1>
+        <div id="error"></div>
+        <div class="oculta" id="vista_login"></div>
+        <div class="oculta" id="vista_oportuna"></div>
+        <div id="tvesModalGeneral" class="modalContainer oculta">
+            <div id="modal_move_general"  class="movida" onmousemove="ratonMovido(this,event);" >
+                <div class="modal-content" >
+                    <div class="cerrar_modal" onmousedown="ratonPulsado(this.parentNode,event);" onmouseup="ratonSoltado(event);"><span class="close" onclick="cerrar_modal();">×</span></div>
+                    
+                    <div id="modal_contenido_general"></div>
+                        
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

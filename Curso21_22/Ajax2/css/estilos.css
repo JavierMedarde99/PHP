@@ -1,0 +1,7 @@
+.oculta{display:none}
+.visible{display:block}
+.enlace{border:none;background:none;text-decoration:underline;color:blue;cursor: pointer;}
+table,td,th{border:1px solid black}
+table{border-collapse:collapse;}
+th{background-color: #CCC;}
+.centrar{text-align:center;}
